@@ -1,2 +1,2 @@
-# Who-8-my-pasta
+# Gamification-of-Personal-Fiance-and-Budgeting
 CPSC 362
