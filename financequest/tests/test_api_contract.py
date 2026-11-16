@@ -7,8 +7,9 @@ class APIScaffoldTests(unittest.TestCase):
 
     def test_api_stubs_are_explicitly_unimplemented(self):
         # Replace these assertions as endpoints become functional.
+        # /api/savings/ is implemented (Member 4); see tests/test_savings.py.
         for path in ["/api/dashboard/", "/api/transactions/", "/api/budgets/",
-                     "/api/savings/", "/api/mascot/"]:
+                     "/api/mascot/"]:
             with self.subTest(path=path):
                 result = self.client.get(path)
                 self.assertEqual(result.status_code, 501)

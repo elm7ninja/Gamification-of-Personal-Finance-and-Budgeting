@@ -14,6 +14,18 @@ CREATE TABLE IF NOT EXISTS savings_goals (
  name TEXT NOT NULL, target_cents INTEGER NOT NULL CHECK(target_cents > 0),
  saved_cents INTEGER NOT NULL DEFAULT 0 CHECK(saved_cents >= 0)
 );
+-- Member 4: one row per deposit into a savings goal (deposit history).
+-- request_id is optional; when the frontend sends one, the UNIQUE rule stops
+-- the same deposit being saved twice (for example after a double-click).
+CREATE TABLE IF NOT EXISTS savings_deposits (
+ id INTEGER PRIMARY KEY AUTOINCREMENT,
+ goal_id INTEGER NOT NULL REFERENCES savings_goals(id),
+ user_id INTEGER NOT NULL REFERENCES users(id),
+ amount_cents INTEGER NOT NULL CHECK(amount_cents > 0),
+ request_id TEXT,
+ created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ UNIQUE(user_id, request_id)
+);
 CREATE TABLE IF NOT EXISTS budgets (
  id INTEGER PRIMARY KEY AUTOINCREMENT,
  user_id INTEGER NOT NULL REFERENCES users(id),
